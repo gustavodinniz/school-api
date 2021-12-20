@@ -15,6 +15,5 @@ public class GridData<DTO> {
 
     private Long totalCount;
     private List<DTO> items;
-    private String reportLink;
 
 }
