@@ -25,12 +25,12 @@ public class User {
 
     @Size(max = 20)
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String username;
 
     @NotBlank
     @Email
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     public User(String username, String email) {
