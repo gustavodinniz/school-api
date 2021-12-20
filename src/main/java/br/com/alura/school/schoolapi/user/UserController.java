@@ -1,5 +1,6 @@
 package br.com.alura.school.schoolapi.user;
 
+import br.com.alura.school.schoolapi.config.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class UserController {
     @GetMapping("/{username}")
     ResponseEntity<UserResponse> userByUsername(@PathVariable("username") String username) {
         User user = userRepository
-                .findByUsername(username).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("User %s not found", username)));
+                .findByUsername(username).orElseThrow(() -> new NotFoundException(format("User %s not found", username)));
         log.info("Fetching User: " + username);
         return ResponseEntity.ok(new UserResponse(user));
     }

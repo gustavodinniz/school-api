@@ -1,5 +1,7 @@
 package br.com.alura.school.schoolapi.course;
 
+import br.com.alura.school.schoolapi.config.exception.NotFoundException;
+import br.com.alura.school.schoolapi.config.exception.ValidationException;
 import br.com.alura.school.schoolapi.config.utils.GridData;
 import br.com.alura.school.schoolapi.enroll.*;
 import br.com.alura.school.schoolapi.user.User;
@@ -43,7 +45,7 @@ public class CourseController {
     @GetMapping("/{code}")
     ResponseEntity<CourseResponse> courseByCode(@PathVariable("code") String code) {
         Course course = courseRepository.findByCode(code)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("Course with code %s not found", code)));
+                .orElseThrow(() -> new NotFoundException(format("Course with code %s not found", code)));
         log.info("Fetching Course by code: " + code);
         return ResponseEntity.ok(new CourseResponse(course));
     }
@@ -76,7 +78,7 @@ public class CourseController {
     private void validatedUserEnrollCourse(String code, NewEnrollRequest newEnrollRequest) {
         Optional<Enroll> enrollByCodeAndUsername = enrollRepository.findByCodeAndUsername(code, newEnrollRequest.getUsername());
         if (enrollByCodeAndUsername.isPresent()) {
-            throw new ResponseStatusException(BAD_REQUEST, format("User is already enrolled in the course.", newEnrollRequest.getUsername()));
+            throw new ValidationException(format("User is already enrolled in the course.", newEnrollRequest.getUsername()));
         }
     }
 
@@ -86,12 +88,12 @@ public class CourseController {
 
     private User getUser(NewEnrollRequest newEnrollRequest) {
         return userRepository.findByUsername(newEnrollRequest.getUsername())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("User %s not found", newEnrollRequest.getUsername())));
+                .orElseThrow(() -> new NotFoundException(format("User %s not found", newEnrollRequest.getUsername())));
     }
 
     private Course getCourse(String code) {
         return courseRepository.findByCode(code)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("Course with code %s not found", code)));
+                .orElseThrow(() -> new NotFoundException(format("Course with code %s not found", code)));
     }
 
     @GetMapping("/enroll/report")
