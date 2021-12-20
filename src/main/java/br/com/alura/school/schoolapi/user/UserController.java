@@ -64,11 +64,11 @@ public class UserController {
         }
 
         if(newUserRequest.getUsername() == null || newUserRequest.getUsername().isEmpty()){
-            throw new ValidationException(format("Username must be informed: "));
+            throw new ValidationException(format("Username must be informed"));
         }
 
         if(newUserRequest.getEmail() == null || newUserRequest.getEmail().isEmpty()){
-            throw new ValidationException(format("Email must be informed: "));
+            throw new ValidationException(format("Email must be informed"));
         }
 
     }
