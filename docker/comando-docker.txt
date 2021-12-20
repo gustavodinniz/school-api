@@ -1,0 +1,4 @@
+Container School-DB:
+
+sudo docker run --name school-db -p 5434:5432 -e POSTGRES_DB=school-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=123456 postgres:11
+
