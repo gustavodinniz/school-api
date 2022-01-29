@@ -12,12 +12,11 @@ São utilizadas as tecnologias:
 - Spring Web
 - Bean Validation
 - Spring Data JPA
-- H2, o BD relacional em memória
+- PostgreSQL
+- Docker
 
 Abra o projeto na IDE da sua preferência.
-
 Execute os testes automatizados. 
-
 Suba a aplicação e explore a API com uma ferramenta como [cURL](https://curl.se/), [Insomnia](https://insomnia.rest/), [Postman](https://www.postman.com/).
 
 Alguns exemplos de chamadas usando cURL estão em [exemplos-curl.md](exemplos-curl.md).
